@@ -52,15 +52,10 @@ nav a:hover{
 .hero{
   margin-top:120px;
   padding:6rem 8%;
-  position:relative;
   display:flex;
   align-items:center;
   justify-content:space-between;
   background:linear-gradient(120deg,#000 55%, #ffcc00 55%);
-}
-
-.hero-left{
-  flex:1;
 }
 
 .hero-left h1{
@@ -72,52 +67,31 @@ nav a:hover{
 }
 
 .alias{
-  font-size:0.35em; /* much smaller */
-  letter-spacing:3px;
-  color:#ffffff;
-  vertical-align:middle;
+  font-size:0.35em;
+  color:#fff;
 }
 
 .hero-left h2{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,3vw,3rem);
+  font-size:clamp(1.5rem,3vw,2.5rem);
   margin-top:1rem;
-}
-
-.hero-right{
-  flex:1;
-  display:flex;
-  justify-content:center;
 }
 
 .hero-right img{
   width:100%;
-  max-width:550px;
-  filter:drop-shadow(0 60px 60px rgba(0,0,0,0.9));
+  max-width:500px;
 }
 
-/* INFO CARDS */
 .section{
-  padding:6rem 8%;
+  padding:5rem 8%;
   background:#111;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:40px;
 }
 
 .card{
   background:#000;
-  padding:2.5rem;
+  padding:2rem;
   border-left:6px solid #ffcc00;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 20px 40px rgba(255,204,0,0.3);
+  margin-bottom:2rem;
 }
 
 .card h3{
@@ -135,6 +109,45 @@ nav a:hover{
   color:#eee;
 }
 
+/* COLLAPSIBLE */
+details{
+  margin-bottom:2rem;
+  border:2px solid #ffcc00;
+  padding:1rem 2rem;
+  background:#000;
+}
+
+summary{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;
+  letter-spacing:3px;
+  cursor:pointer;
+  color:#ffcc00;
+}
+
+/* PROGRESS BAR */
+.skill{
+  margin:1.5rem 0;
+}
+
+.skill-name{
+  font-weight:700;
+  margin-bottom:0.5rem;
+}
+
+.bar{
+  width:100%;
+  background:#222;
+  height:15px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  background:#ffcc00;
+}
+
 .signature{
   text-align:center;
   font-family:'Playfair Display',serif;
@@ -145,13 +158,7 @@ nav a:hover{
 }
 
 @media(max-width:900px){
-  .hero{
-    flex-direction:column;
-    background:#000;
-    text-align:center;
-  }
-
-  .hero-left h1{color:#ffcc00}
+  .hero{flex-direction:column;text-align:center;background:#000}
 }
 
 </style>
@@ -168,9 +175,10 @@ nav a:hover{
 
 <section class="hero">
   <div class="hero-left">
-    <h1 class="main-name">
-        JOSHUA <span class="alias">(Hiroyuki)</span><br>V. MACARAIG
-      </h1>
+    <h1>
+      JOSHUA <span class="alias">(Hiroyuki)</span><br>
+      V. MACARAIG
+    </h1>
     <h2>Creative Art Student, Script Writer & Visual Designer</h2>
   </div>
   <div class="hero-right">
@@ -179,62 +187,83 @@ nav a:hover{
 </section>
 
 <section class="section">
-  <div class="cards">
 
-    <div class="card">
-      <h3>WHO I AM</h3>
-      <p>
-        I am a passionate art student focused on bold visuals and strong graphic storytelling.
-      </p>
+  <div class="card">
+    <h3>ABOUT ME</h3>
+    <p>
+      I am a passionate art student focused on bold visuals, strong storytelling, and creative design execution.
+    </p>
+  </div>
+
+  <!-- HARD SKILLS TAB -->
+  <details>
+    <summary>HARD SKILLS</summary>
+    <p>
+      • Digital Illustration<br>
+      • Character Design<br>
+      • Video Editing<br>
+      • Traditional Drawing<br>
+      • Script Writing<br>
+      • Crafting
+    </p>
+  </details>
+
+    <!-- TOOLS TAB -->
+  <details>
+    <summary>TOOLS</summary>
+    <p>
+      • Ibis PaintX<br>
+      • Capcut<br>
+      • Figma<br>
+      • Canva
+    </p>
+  </details>
+
+  <!-- SOFT SKILLS WITH PROGRESS BARS -->
+  <div class="card">
+    <h3>SOFT SKILLS</h3>
+
+    <div class="skill">
+      <div class="skill-name">Leadership - 88%</div>
+      <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
     </div>
 
-    <div class="card">
-      <h3>WHAT I CREATE</h3>
-      <p>
-        I produce music videos, scripts, traditional art, crafts, and digital illustrations.
-      </p>
+    <div class="skill">
+      <div class="skill-name">Emotional Intelligence - 96%</div>
+      <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
     </div>
 
-    <div class="card">
-      <h3>MY GOAL</h3>
-      <p>
-        To design powerful, emotional, and unforgettable creative works.
-      </p>
+    <div class="skill">
+      <div class="skill-name">Creativity - 88%</div>
+      <div class="bar"><div class="bar-fill" style="width:95%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">Teamwork - 94%</div>
+      <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+    </div>
+
+     <div class="skill">
+      <div class="skill-name">Time Management - 93%</div>
+      <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+    </div>
+
+     <div class="skill">
+      <div class="skill-name">Written Communication - 94%</div>
+      <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+    </div>
+
+     <div class="skill">
+      <div class="skill-name">Multitasking - 84%</div>
+      <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
     </div>
 
   </div>
+
+
 </section>
 
-<section class="section">
-  <div class="cards">
-
-    <div class="card">
-      <h3>SKILLS</h3>
-      <p>
-        • Digital Illustration<br>
-        • Character Design<br>
-        • Video Editing<br>
-        • Traditional Drawing<br>
-        • Creative Concept Development<br>
-        • Craftingt<br>
-        • Script Writing
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>TOOLS</h3>
-      <p>
-        • Ibis Paint<br>
-        • Capcut<br>
-        • Canva<br>
-        • Figma
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<div class="signature">— Hiroyuki</div>
+<div class="signature">— Joshua (Hiroyuki)</div>
 
 </body>
 </html>
