@@ -200,20 +200,7 @@ nav a:hover{
     <button class="filter-btn" onclick="filterSelection('graphics', event)">GRAPHICS</button>
   </div>
 
-  <!-- ADD WORK SECTION -->
-  <div style="margin-bottom:40px; text-align:center;">
-    <select id="categorySelect" style="padding:10px; font-weight:700;">
-      <option value="videos">Videos</option>
-      <option value="digital">Digital Art</option>
-      <option value="traditional">Traditional Art</option>
-      <option value="crafts">Crafts</option>
-      <option value="graphics">Graphics</option>
-    </select>
-    <input type="file" id="imageUpload" accept="image/*" style="padding:10px;">
-    <button onclick="addWork()" class="filter-btn">ADD WORK</button>
-  </div>
-
-  <div class="grid" id="gallery">
+    <div class="grid" id="gallery">
 
     <div class="work-card videos">
       <img src="images/sample1.jpg" onclick="openLightbox(0)">
@@ -221,7 +208,7 @@ nav a:hover{
     </div>
 
     <div class="work-card digital">
-      <img src="Trio.png" onclick="openLightbox(1)">
+      <img src="images/sample2.jpg" onclick="openLightbox(1)">
       <div class="work-label">Digital Art</div>
     </div>
 
@@ -255,6 +242,8 @@ nav a:hover{
 </div>
 
 <script>
+let currentIndex = 0;
+
 function filterSelection(category, event){
   let cards=document.getElementsByClassName('work-card');
   let buttons=document.getElementsByClassName('filter-btn');
@@ -270,35 +259,27 @@ function filterSelection(category, event){
   }
 }
 
-function addWork(){
-  const fileInput=document.getElementById('imageUpload');
-  const category=document.getElementById('categorySelect').value;
-  const grid=document.querySelector('.grid');
+function openLightbox(index){
+  const images=document.querySelectorAll('.work-card img');
+  currentIndex=index;
+  document.getElementById('lightbox-img').src=images[currentIndex].src;
+  document.getElementById('lightbox').style.display='flex';
+}
 
-  if(fileInput.files.length===0){
-    alert('Please select an image first.');
-    return;
-  }
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none';
+}
 
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const card=document.createElement('div');
-    card.className='work-card '+category;
+function nextImage(){
+  const images=document.querySelectorAll('.work-card img');
+  currentIndex=(currentIndex+1)%images.length;
+  document.getElementById('lightbox-img').src=images[currentIndex].src;
+}
 
-    const img=document.createElement('img');
-    img.src=e.target.result;
-
-    const label=document.createElement('div');
-    label.className='work-label';
-    label.innerText='New Work';
-
-    card.appendChild(img);
-    card.appendChild(label);
-    grid.appendChild(card);
-  }
-  reader.readAsDataURL(fileInput.files[0]);
-
-  fileInput.value='';
+function prevImage(){
+  const images=document.querySelectorAll('.work-card img');
+  currentIndex=(currentIndex-1+images.length)%images.length;
+  document.getElementById('lightbox-img').src=images[currentIndex].src;
 }
 </script>
 
