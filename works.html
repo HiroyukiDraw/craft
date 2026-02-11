@@ -59,6 +59,7 @@ nav a:hover{
   letter-spacing:8px;
   color:#ffcc00;
   margin-bottom:3rem;
+  text-align:center;
 }
 
 /* FILTER BUTTONS */
@@ -187,12 +188,25 @@ nav a:hover{
   <div class="title">MY WORKS</div>
 
   <div class="filters">
-    <button class="filter-btn active" onclick="filterSelection('all',event)">ALL</button>
-    <button class="filter-btn" onclick="filterSelection('videos',event)">VIDEOS</button>
-    <button class="filter-btn" onclick="filterSelection('digital',event)">DIGITAL ART</button>
-    <button class="filter-btn" onclick="filterSelection('traditional',event)">TRADITIONAL ART</button>
-    <button class="filter-btn" onclick="filterSelection('crafts',event)">CRAFTS</button>
-    <button class="filter-btn" onclick="filterSelection('graphics',event)">GRAPHICS</button>
+    <button class="filter-btn active" onclick="filterSelection('all', event)">ALL</button>
+    <button class="filter-btn" onclick="filterSelection('videos', event)">VIDEOS</button>
+    <button class="filter-btn" onclick="filterSelection('digital', event)">DIGITAL ART</button>
+    <button class="filter-btn" onclick="filterSelection('traditional', event)">TRADITIONAL ART</button>
+    <button class="filter-btn" onclick="filterSelection('crafts', event)">CRAFTS</button>
+    <button class="filter-btn" onclick="filterSelection('graphics', event)">GRAPHICS</button>
+  </div>
+
+  <!-- ADD WORK SECTION -->
+  <div style="margin-bottom:40px; text-align:center;">
+    <select id="categorySelect" style="padding:10px; font-weight:700;">
+      <option value="videos">Videos</option>
+      <option value="digital">Digital Art</option>
+      <option value="traditional">Traditional Art</option>
+      <option value="crafts">Crafts</option>
+      <option value="graphics">Graphics</option>
+    </select>
+    <input type="file" id="imageUpload" accept="image/*" style="padding:10px;">
+    <button onclick="addWork()" class="filter-btn">ADD WORK</button>
   </div>
 
   <div class="grid" id="gallery">
@@ -237,15 +251,12 @@ nav a:hover{
 </div>
 
 <script>
-let currentIndex = 0;
-let images = document.querySelectorAll('#gallery img');
-
-function filterSelection(category,event){
+function filterSelection(category, event){
   let cards=document.getElementsByClassName('work-card');
   let buttons=document.getElementsByClassName('filter-btn');
 
   for(let btn of buttons){btn.classList.remove('active');}
-  event.target.classList.add('active');
+  if(event) event.target.classList.add('active');
 
   for(let card of cards){
     card.classList.remove('hidden');
@@ -255,24 +266,35 @@ function filterSelection(category,event){
   }
 }
 
-function openLightbox(index){
-  currentIndex = index;
-  document.getElementById('lightbox').style.display='flex';
-  document.getElementById('lightbox-img').src = images[currentIndex].src;
-}
+function addWork(){
+  const fileInput=document.getElementById('imageUpload');
+  const category=document.getElementById('categorySelect').value;
+  const grid=document.querySelector('.grid');
 
-function closeLightbox(){
-  document.getElementById('lightbox').style.display='none';
-}
+  if(fileInput.files.length===0){
+    alert('Please select an image first.');
+    return;
+  }
 
-function nextImage(){
-  currentIndex = (currentIndex + 1) % images.length;
-  document.getElementById('lightbox-img').src = images[currentIndex].src;
-}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const card=document.createElement('div');
+    card.className='work-card '+category;
 
-function prevImage(){
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  document.getElementById('lightbox-img').src = images[currentIndex].src;
+    const img=document.createElement('img');
+    img.src=e.target.result;
+
+    const label=document.createElement('div');
+    label.className='work-label';
+    label.innerText='New Work';
+
+    card.appendChild(img);
+    card.appendChild(label);
+    grid.appendChild(card);
+  }
+  reader.readAsDataURL(fileInput.files[0]);
+
+  fileInput.value='';
 }
 </script>
 
